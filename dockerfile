@@ -19,4 +19,4 @@ ENTRYPOINT ["./k6"]
 # docker build -t my-xk6-app .
 
 # Run the container
-# docker run -it --rm -v "$(pwd):/app" my-xk6-app run /app/script.js
+# docker run -it --rm -v "$(pwd):/app" my-xk6-app run --out output-statsd /app/script.js
