@@ -1,5 +1,8 @@
 # Stage 1: Build the custom k6 binary with xk6
 FROM golang:1.24.4-alpine AS builder
+# Install necessary packages
+RUN apk add --no-cache make gcc musl-dev
+RUN apk update && apk add git
 WORKDIR /build
 
 # Install xk6 and build k6 with desired extensions
@@ -11,3 +14,9 @@ FROM alpine:latest
 WORKDIR /home/k6
 COPY --from=builder /build/k6 .
 ENTRYPOINT ["./k6"]
+
+# Build the image
+# docker build -t my-xk6-app .
+
+# Run the container
+# docker run -it --rm -v "$(pwd):/app" my-xk6-app run /app/script.js
